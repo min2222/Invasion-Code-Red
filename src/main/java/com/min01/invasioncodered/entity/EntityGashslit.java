@@ -67,6 +67,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	protected static final AnimationBuilder SHOOT = new AnimationBuilder().addAnimation("animation.gashslit.shoot", ILoopType.EDefaultLoopTypes.LOOP);
 	protected static final AnimationBuilder FLEX = new AnimationBuilder().addAnimation("animation.gashslit.flex", ILoopType.EDefaultLoopTypes.LOOP);
 	protected static final AnimationBuilder DEATH = new AnimationBuilder().addAnimation("animation.gashslit.death", ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME);
+	protected static final AnimationBuilder RAGE_POSE = new AnimationBuilder().addAnimation("animation.gashslit.ragepose", ILoopType.EDefaultLoopTypes.LOOP);
 	
 	private static final EntityDataAccessor<Boolean> POWER = SynchedEntityData.defineId(EntityGashslit.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> DEFENSE = SynchedEntityData.defineId(EntityGashslit.class, EntityDataSerializers.BOOLEAN);
@@ -943,7 +944,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 		data.addAnimationController(new AnimationController<>(this, "attack", 1, this::attackController));
 		data.addAnimationController(new AnimationController<>(this, "dash", 4, this::dashController));
 		data.addAnimationController(new AnimationController<>(this, "block", 4, this::blockController));
-		data.addAnimationController(new AnimationController<>(this, "run", 6, this::runController));
+		data.addAnimationController(new AnimationController<>(this, "move", 6, this::moveController));
 		data.addAnimationController(new AnimationController<>(this, "stepback", 2, this::stepbackController));
 		data.addAnimationController(new AnimationController<>(this, "shoot", 1, this::shootController));
 		data.addAnimationController(new AnimationController<>(this, "summon", 4, this::summonController));
@@ -1001,11 +1002,22 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     	return PlayState.STOP;
     }
 	
-    protected PlayState runController(AnimationEvent<EntityGashslit> event) 
+    protected PlayState moveController(AnimationEvent<EntityGashslit> event) 
     {
     	if(this.isOnGround() && event.isMoving())
     	{
-    		event.getController().setAnimation(RUN);
+    		if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) > 0.98)
+    		{
+        		event.getController().setAnimation(RUN);
+    		}
+    		else if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) > 0.2)
+    		{
+        		event.getController().setAnimation(WALK);
+    		}
+    		if(this.getHealth() <= 300)
+    		{
+        		event.getController().setAnimation(RAGE_POSE);
+    		}
     		return PlayState.CONTINUE;
     	}
     	return PlayState.STOP;
