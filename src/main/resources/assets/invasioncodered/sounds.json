@@ -1,0 +1,40 @@
+{
+  "gashslit_hurt": {
+    "category": "entity",
+    "subtitle": "gashslit_hurt",
+    "sounds": [
+		"invasioncodered:mob/gashslit/hurt",
+		"invasioncodered:mob/gashslit/hurt2",
+		"invasioncodered:mob/gashslit/hurt3"
+    ]
+  },
+  "gashslit_ambient": {
+    "category": "entity",
+    "subtitle": "gashslit_ambient",
+    "sounds": [
+		"invasioncodered:mob/gashslit/idle1",
+		"invasioncodered:mob/gashslit/idle2"
+    ]
+  },
+  "gashslit_slice": {
+    "category": "entity",
+    "subtitle": "gashslit_slice",
+    "sounds": [
+		"invasioncodered:mob/gashslit/slice1"
+    ]
+  },
+  "gashslit_slice1": {
+    "category": "entity",
+    "subtitle": "gashslit_slice1",
+    "sounds": [
+		"invasioncodered:mob/gashslit/slice2"
+    ]
+  },
+  "gashslit_slice3": {
+    "category": "entity",
+    "subtitle": "gashslit_slice3",
+    "sounds": [
+		"invasioncodered:mob/gashslit/slice3"
+    ]
+  }
+}
