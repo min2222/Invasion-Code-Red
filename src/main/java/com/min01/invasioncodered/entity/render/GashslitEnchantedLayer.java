@@ -41,8 +41,8 @@ public class GashslitEnchantedLayer extends GeoLayerRenderer<EntityGashslit>
 			EntityModelData entityModelData = new EntityModelData();
 			entityModelData.isSitting = shouldSit;
 			entityModelData.isChild = entityLivingBaseIn.isBaby();
-			entityModelData.headPitch = headPitch;
-			entityModelData.netHeadYaw = netHeadYaw;
+			entityModelData.headPitch = -headPitch;
+			entityModelData.netHeadYaw = -netHeadYaw;
 			AnimationEvent<EntityGashslit> predicate = new AnimationEvent<EntityGashslit>(entityLivingBaseIn, limbSwing, limbSwingAmount, partialTicks, (limbSwingAmount <= -getSwingMotionAnimThreshold() || limbSwingAmount > getSwingMotionAnimThreshold()), Collections.singletonList(entityModelData));
 	        ((AnimatedGeoModel<EntityGashslit>) this.getRenderer().getGeoModelProvider()).setCustomAnimations(entityLivingBaseIn, entityLivingBaseIn.getId(), predicate);
 	        this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, type, matrixStackIn, bufferIn, bufferIn.getBuffer(type), packedLightIn, OverlayTexture.NO_OVERLAY, 0.5F, 1F, 1F, 1F);
