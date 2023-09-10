@@ -43,8 +43,11 @@ public class GashslitModel extends AnimatedGeoModel<EntityGashslit>
         EntityModelData extraData = (EntityModelData) animationEvent.getExtraDataOfType(EntityModelData.class).get(0);
         head.setRotationY(extraData.netHeadYaw * ((float)Math.PI / 180F));
         head.setRotationX(extraData.headPitch * ((float)Math.PI / 180F));
-        rightLeg.setRotationX(Mth.cos(animationEvent.getLimbSwing() * 0.6662F) * 1.4F * animationEvent.getLimbSwingAmount() * 0.5F);
-        leftLeg.setRotationX(Mth.cos(animationEvent.getLimbSwing() * 0.6662F + (float)Math.PI) * 1.4F * animationEvent.getLimbSwingAmount() * 0.5F);
+        if(leftLeg != null && rightLeg != null)
+        {
+            rightLeg.setRotationX(Mth.cos(animationEvent.getLimbSwing() * 0.6662F) * 1.4F * animationEvent.getLimbSwingAmount() * 0.5F);
+            leftLeg.setRotationX(Mth.cos(animationEvent.getLimbSwing() * 0.6662F + (float)Math.PI) * 1.4F * animationEvent.getLimbSwingAmount() * 0.5F);
+        }
 		if(!animatable.isEventFired())
 		{
 	        leftArm.setRotationX(Mth.cos(animationEvent.getLimbSwing() * 0.6662F) * 1.4F * animationEvent.getLimbSwingAmount() * 0.5F);
