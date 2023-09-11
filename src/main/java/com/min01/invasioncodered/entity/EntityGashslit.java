@@ -211,6 +211,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     		{
 	    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2400, 2, true, false));
 	    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 780, 1, true, false));
+        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
         		this.entityData.set(DEFENSE, true);
     		}
     		else if(this.getHealth() <= 150 && !this.entityData.get(POWER2))
@@ -223,6 +224,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
            		this.removeAllEffects();
         		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 4, true, false));
         		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 2, true, false));
+        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
         		this.entityData.set(LAST_CHANCE, true);
     		}
 		}
@@ -292,22 +294,6 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
         		this.level.addFreshEntity(slash);
         	}
     	}
-    	
-    	if(this.isAlive() && this.getHealth() <= 300 && !this.entityData.get(DEFENSE) && this.level.isClientSide)
-		{
-       		for(int i = 0; i < 60; i++)
-       		{
-       			this.level.addParticle(ICRParticles.POP_EFFECT.get(), this.getX() + this.level.random.nextGaussian() * 0.2F, this.getY() + 0.5 + this.level.random.nextGaussian() * 0.2F, this.getZ() + this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F);
-       		}
-		}
-    	
-    	if(this.isAlive() && this.getHealth() <= 10 && !this.entityData.get(LAST_CHANCE) && this.level.isClientSide)
-		{
-       		for(int i = 0; i < 60; i++)
-       		{
-       			this.level.addParticle(ICRParticles.POP_EFFECT.get(), this.getX() + this.level.random.nextGaussian() * 0.2F, this.getY() + 0.5 + this.level.random.nextGaussian() * 0.2F, this.getZ() + this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F, this.level.random.nextGaussian() * 0.2F);
-       		}
-		}
     	
     	if(this.getHealth() <= 300)
     	{

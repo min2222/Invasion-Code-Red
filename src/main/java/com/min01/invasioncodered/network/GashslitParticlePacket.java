@@ -18,7 +18,7 @@ public class GashslitParticlePacket
 
     public enum ParticleType 
     {
-        SLASH_HIT, DASH_SMOKE, DASH_TRAIL
+        SLASH_HIT, DASH_SMOKE, DASH_TRAIL, POP_EFFECT
     }
 
     public GashslitParticlePacket(ParticleType type, EntityGashslit entity) 
@@ -66,6 +66,12 @@ public class GashslitParticlePacket
 		        	{
 						minecraft.level.addParticle(ICRParticles.DASH_TRAIL.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.5D, entity.getY() + 0.3 + minecraft.level.random.nextGaussian() * 0.5D, entity.getZ() + minecraft.level.random.nextGaussian() * 0.5D, 0, 0.2, 0);
 		        	}
+					break;
+				case POP_EFFECT:
+		       		for(int i = 0; i < 60; i++)
+		       		{
+		       			minecraft.level.addParticle(ICRParticles.POP_EFFECT.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.2F, entity.getY() + 0.5 + minecraft.level.random.nextGaussian() * 0.2F, entity.getZ() + minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F);
+		       		}
 					break;
 				default:
 					break;

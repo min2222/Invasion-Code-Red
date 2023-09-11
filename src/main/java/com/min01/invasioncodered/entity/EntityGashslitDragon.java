@@ -41,6 +41,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 public class EntityGashslitDragon extends Monster implements IAnimatable, RangedAttackMob
 {
 	protected static final AnimationBuilder SHOOT = new AnimationBuilder().addAnimation("animation.gashslitdragon.shoot", ILoopType.EDefaultLoopTypes.LOOP);
+	protected static final AnimationBuilder FLY = new AnimationBuilder().addAnimation("animation.gashslitdragon.fly", ILoopType.EDefaultLoopTypes.LOOP);
 	private static final EntityDataAccessor<Boolean> IS_HEALER = SynchedEntityData.defineId(EntityGashslit.class, EntityDataSerializers.BOOLEAN);
 	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private boolean hasLimitedLife;
@@ -164,6 +165,7 @@ public class EntityGashslitDragon extends Monster implements IAnimatable, Ranged
 	public void registerControllers(AnimationData data)
 	{
 		data.addAnimationController(new AnimationController<>(this, "fly", 1, this::flyController));
+		data.addAnimationController(new AnimationController<>(this, "shoot", 1, this::shootController));
 	}
 
 	@Override
@@ -173,6 +175,12 @@ public class EntityGashslitDragon extends Monster implements IAnimatable, Ranged
 	}
 	
     protected PlayState flyController(AnimationEvent<EntityGashslitDragon> event) 
+    {
+		event.getController().setAnimation(FLY);
+		return PlayState.CONTINUE;
+    }
+    
+    protected PlayState shootController(AnimationEvent<EntityGashslitDragon> event) 
     {
 		event.getController().setAnimation(SHOOT);
 		return PlayState.CONTINUE;

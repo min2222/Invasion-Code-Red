@@ -48,11 +48,11 @@ public class RangeSlashRenderer extends EntityRenderer<EntityRangeSlash> impleme
 		}
 		else
 		{
-			poseStack.scale(0.5F, 0.5F, 0.5F);
+			poseStack.scale(0.75F, 0.75F, 0.75F);
 		}
 		poseStack.translate(0, -0.5f, 0);
 		RenderSystem.setShaderTexture(0, getTextureLocation(animatable));
-		RenderType renderType = ICRRenderType.getGlowingEffect(getTextureLocation(animatable));
+		RenderType renderType = animatable.isBig() ? RenderType.eyes(getTextureLocation(animatable)) : ICRRenderType.getGlowingEffect(getTextureLocation(animatable));
 
 		if (!animatable.isInvisibleTo(Minecraft.getInstance().player)) 
 		{
