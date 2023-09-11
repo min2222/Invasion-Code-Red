@@ -288,7 +288,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
         		double d1 = this.getTarget().getY(0.5) - slash.getY();
         		double d2 = this.getTarget().getZ() - this.getZ();
         		double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        		slash.shoot(d0, d1 + d3 * (double)0.0F, d2, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        		slash.shoot(d0 * 3, d1 + d3 * (double)0.0F, d2 * 3, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
         		this.level.addFreshEntity(slash);
         	}
     	}
@@ -1006,20 +1006,21 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     {
     	if(this.isOnGround() && event.isMoving())
     	{
-    		if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) > 0.98)
+    		if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) >= 0.98)
     		{
         		event.getController().setAnimation(RUN);
     		}
-    		else if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) > 0.2)
+    		else if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) <= 0.2)
     		{
         		event.getController().setAnimation(WALK);
     		}
-    		if(this.getHealth() <= 300)
-    		{
-        		event.getController().setAnimation(RAGE_POSE);
-    		}
     		return PlayState.CONTINUE;
     	}
+		if(this.getHealth() <= 300)
+		{
+    		event.getController().setAnimation(RAGE_POSE);
+    		return PlayState.CONTINUE;
+		}
     	return PlayState.STOP;
     }
 	

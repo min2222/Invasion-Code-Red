@@ -3,6 +3,7 @@ package com.min01.invasioncodered.entity.render;
 import com.min01.invasioncodered.InvasionCodeRed;
 import com.min01.invasioncodered.entity.EntityRangeSlash;
 import com.min01.invasioncodered.entity.model.RangeSlashModel;
+import com.min01.invasioncodered.misc.ICRRenderType;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -47,11 +48,11 @@ public class RangeSlashRenderer extends EntityRenderer<EntityRangeSlash> impleme
 		}
 		else
 		{
-			poseStack.scale(1, 1, 1);
+			poseStack.scale(0.5F, 0.5F, 0.5F);
 		}
 		poseStack.translate(0, -0.5f, 0);
 		RenderSystem.setShaderTexture(0, getTextureLocation(animatable));
-		RenderType renderType = RenderType.eyes(getTextureLocation(animatable));
+		RenderType renderType = ICRRenderType.getGlowingEffect(getTextureLocation(animatable));
 
 		if (!animatable.isInvisibleTo(Minecraft.getInstance().player)) 
 		{
