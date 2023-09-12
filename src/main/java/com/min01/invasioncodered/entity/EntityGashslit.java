@@ -270,12 +270,12 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     		this.removeAllEvents();
     	}
     	
-    	if(!this.isAlive() && this.deathAnimTime <= 0)
+    	if(!this.isAlive())
     	{
     		this.removeAllEvents();
     	}
     	
-    	if(this.getSkinID() == 6 && this.getTarget() != null)
+    	if(this.getSkinID() == 6 && this.getTarget() != null && this.isAlive())
     	{
         	if(this.tickCount % 5 == 0)
         	{
@@ -1002,7 +1002,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     		}
     		return PlayState.CONTINUE;
     	}
-		if(this.getHealth() <= 300)
+		if(this.getHealth() <= 300 && this.getSkinID() == 0)
 		{
     		event.getController().setAnimation(RAGE_POSE);
     		return PlayState.CONTINUE;
