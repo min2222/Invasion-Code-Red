@@ -25,39 +25,22 @@
 					]
 				},
 				{
-					"name": "rightitem",
-					"parent": "w",
-					"pivot": [-12, 38, 32]
-				},
-				{
-					"name": "r",
+					"name": "robecollection",
 					"parent": "w",
 					"pivot": [0, 40, 28],
 					"rotation": [2.5, 0, 0]
 				},
 				{
-					"name": "robe",
-					"parent": "r",
-					"pivot": [0, 40, 32],
-					"rotation": [0, 0, 7.5]
-				},
-				{
-					"name": "robe2",
-					"parent": "r",
-					"pivot": [0, 40, 32],
-					"rotation": [0, 0, -7.5]
-				},
-				{
-					"name": "yeahno",
-					"parent": "r",
+					"name": "robe3",
+					"parent": "robecollection",
 					"pivot": [0, 17, 17],
 					"cubes": [
 						{"origin": [-10.551, -5.751, 11.749], "size": [21.002, 22.502, 10.502], "inflate": 0.251, "uv": [27, 31]}
 					]
 				},
 				{
-					"name": "w2",
-					"parent": "yeahno",
+					"name": "bone",
+					"parent": "robe3",
 					"pivot": [0, 40, 24],
 					"cubes": [
 						{"origin": [-6.3, 0.5, 8], "size": [12.5, 18, 2], "pivot": [0, 16, 8], "rotation": [-15, 0, 0], "uv": [74, 40]}
@@ -83,12 +66,6 @@
 					"name": "collar2",
 					"parent": "Head",
 					"pivot": [0, 63.5, 34.5]
-				},
-				{
-					"name": "collar",
-					"parent": "collar2",
-					"pivot": [8, 64, 34.5],
-					"rotation": [0, 0, 12.5]
 				},
 				{
 					"name": "collar3",
@@ -638,11 +615,6 @@
 							}
 						}
 					]
-				},
-				{
-					"name": "RightLeg",
-					"parent": "Body",
-					"pivot": [-3.8, 40, 32]
 				}
 			]
 		}

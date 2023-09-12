@@ -70,7 +70,7 @@ public class GashslitParticlePacket
 				case POP_EFFECT:
 		       		for(int i = 0; i < 60; i++)
 		       		{
-		       			minecraft.level.addParticle(ICRParticles.POP_EFFECT.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.2F, entity.getY() + 0.5 + minecraft.level.random.nextGaussian() * 0.2F, entity.getZ() + minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.2F);
+		       			minecraft.level.addParticle(ICRParticles.POP_EFFECT.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.2F, entity.getY() + 0.5 + minecraft.level.random.nextGaussian() * 0.2F, entity.getZ() + minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F);
 		       		}
 					break;
 				default:

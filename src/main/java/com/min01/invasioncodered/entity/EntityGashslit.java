@@ -290,7 +290,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
         		double d1 = this.getTarget().getY(0.5) - slash.getY();
         		double d2 = this.getTarget().getZ() - this.getZ();
         		double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        		slash.shoot(d0 * 3, d1 + d3 * (double)0.0F, d2 * 3, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        		slash.shoot(d0 * 3, d1 + d3 * (double)0.0F, d2 * 3, 1.6F, 1);
         		this.level.addFreshEntity(slash);
         	}
     	}
