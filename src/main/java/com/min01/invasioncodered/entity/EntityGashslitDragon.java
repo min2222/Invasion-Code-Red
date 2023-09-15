@@ -19,6 +19,8 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -52,6 +54,16 @@ public class EntityGashslitDragon extends Monster implements IAnimatable, Ranged
 		super(p_33002_, p_33003_);
 		this.moveControl = new EntityGashslitDragon.DragonMoveControl(this);
 		this.xpReward = 3;
+	}
+	
+	@Override
+	protected PathNavigation createNavigation(Level p_218342_)
+	{
+		FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_218342_);
+		flyingpathnavigation.setCanOpenDoors(false);
+		flyingpathnavigation.setCanFloat(true);
+		flyingpathnavigation.setCanPassDoors(true);
+		return flyingpathnavigation;
 	}
 	
     public static AttributeSupplier.Builder createAttributes()
