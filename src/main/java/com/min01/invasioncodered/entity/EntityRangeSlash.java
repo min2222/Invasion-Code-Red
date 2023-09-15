@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -49,20 +50,18 @@ public class EntityRangeSlash extends ThrowableProjectile implements IAnimatable
 	}
 	
 	@Override
+	protected void onHitBlock(BlockHitResult p_37258_) 
+	{
+		
+	}
+	
+	@Override
 	protected void onHitEntity(EntityHitResult p_36757_) 
 	{
-		super.onHitEntity(p_36757_);
 		Entity entity = p_36757_.getEntity();
-		if(entity != null)
+		if(this.getOwner() != null && entity != this.getOwner())
 		{
-			if(entity != this.getOwner())
-			{
-				p_36757_.getEntity().hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), this.isBig() ? 26 : 12);
-			}
-		}
-		else
-		{
-			this.discard();
+			entity.hurt(DamageSource.mobAttack((LivingEntity) this.getOwner()), this.isBig() ? 26 : 12);
 		}
 	}
 

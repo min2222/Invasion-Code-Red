@@ -1,5 +1,6 @@
 package com.min01.invasioncodered.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -11,6 +12,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -29,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -75,6 +78,18 @@ public class EntityGashslitDragon extends Monster implements IAnimatable, Ranged
         		.add(Attributes.FOLLOW_RANGE, 100);
     }
     
+	@Override
+	public void travel(Vec3 p_218382_) 
+	{
+		if (this.isEffectiveAi() || this.isControlledByLocalInstance())
+		{
+			this.moveRelative(this.getSpeed(), p_218382_);
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.setDeltaMovement(this.getDeltaMovement().scale((double)0.5));
+		}
+		this.calculateEntityAnimation(this, false);
+	}
+    
     @Override
     public void tick()
     {
@@ -117,6 +132,24 @@ public class EntityGashslitDragon extends Monster implements IAnimatable, Ranged
     	this.hasLimitedLife = true;
         this.limitedLifeTicks = p_33988_;
     }
+    
+	@Override
+	public boolean causeFallDamage(float p_218321_, float p_218322_, DamageSource p_218323_) 
+	{
+		return false;
+	}
+	
+	@Override
+	protected void playStepSound(BlockPos p_218364_, BlockState p_218365_)
+	{
+		
+	}
+
+	@Override
+	protected void checkFallDamage(double p_218316_, boolean p_218317_, BlockState p_218318_, BlockPos p_218319_)
+	{
+		
+	}
     
     @Override
     protected SoundEvent getAmbientSound() 

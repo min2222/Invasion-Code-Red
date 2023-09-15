@@ -183,59 +183,59 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     public void tick() 
     {
     	super.tick();
-		if(this.getTarget() != null && this.getSkinID() != 9)
-		{
-    		if(this.getTarget() != null && !this.isEventFired() && this.getSkinID() == 0)
-    		{
-    			if(this.getHealth() <= 300)
-    			{
-    				this.phase2RandomAttack();
-    			}
-    			else
-    			{
-        			this.randomAttack();
-    			}
-    		}
-    		
-    		if(this.isDelayedAttacking())
-    		{
-        		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 9, true, false));
-    		}
-    		
-    		if(this.getHealth() <= 520 && !this.entityData.get(POWER))
-    		{
-        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0, true, false));
-        		this.entityData.set(POWER, true);
-    		}
-    		else if(this.getHealth() <= 300 && !this.entityData.get(DEFENSE))
-    		{
-	    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2400, 2, true, false));
-	    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 780, 1, true, false));
-        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
-        		this.entityData.set(DEFENSE, true);
-    		}
-    		else if(this.getHealth() <= 150 && !this.entityData.get(POWER2))
-    		{
-        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 199980, 2, true, false));
-        		this.entityData.set(POWER2, true);
-    		}
-    		else if(this.getHealth() <= 10 && !this.entityData.get(LAST_CHANCE))
-    		{
-           		this.removeAllEffects();
-        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 4, true, false));
-        		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 2, true, false));
-        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
-        		this.entityData.set(LAST_CHANCE, true);
-    		}
-		}
-    	
-    	if(this.getTarget() != null)
+    	if(this.isAlive())
     	{
-    		this.lookControl.setLookAt(this.getTarget(), 30, 30);
-    		this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-    		
-        	if(this.isAlive())
-        	{
+    		if(this.getTarget() != null)
+    		{
+    			if(this.getSkinID() != 9)
+    			{
+    	    		if(!this.isEventFired() && this.getSkinID() == 0)
+    	    		{
+    	    			if(this.getHealth() <= 300)
+    	    			{
+    	    				this.phase2RandomAttack();
+    	    			}
+    	    			else
+    	    			{
+    	        			this.randomAttack();
+    	    			}
+    	    		}
+    	    		
+    	    		if(this.isDelayedAttacking())
+    	    		{
+    	        		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 9, true, false));
+    	    		}
+    	    		
+    	    		if(this.getHealth() <= 520 && !this.entityData.get(POWER))
+    	    		{
+    	        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 0, true, false));
+    	        		this.entityData.set(POWER, true);
+    	    		}
+    	    		else if(this.getHealth() <= 300 && !this.entityData.get(DEFENSE))
+    	    		{
+    		    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2400, 2, true, false));
+    		    		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 780, 1, true, false));
+    	        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
+    	        		this.entityData.set(DEFENSE, true);
+    	    		}
+    	    		else if(this.getHealth() <= 150 && !this.entityData.get(POWER2))
+    	    		{
+    	        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 199980, 2, true, false));
+    	        		this.entityData.set(POWER2, true);
+    	    		}
+    	    		else if(this.getHealth() <= 10 && !this.entityData.get(LAST_CHANCE))
+    	    		{
+    	           		this.removeAllEffects();
+    	        		this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 4, true, false));
+    	        		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 2, true, false));
+    	        		ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.POP_EFFECT, this));
+    	        		this.entityData.set(LAST_CHANCE, true);
+    	    		}
+    			}
+    			
+        		this.lookControl.setLookAt(this.getTarget(), 30, 30);
+        		this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+        		
         		for(int i = 0; i < this.events.size(); i++)
         		{
         			TimedEvent event = this.events.get(i);
@@ -262,6 +262,103 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
             			itr.remove();
             		}
         		}
+        		
+            	if(this.getSkinID() == 6)
+            	{
+                	if(this.tickCount % 5 == 0)
+                	{
+                		EntityRangeSlash slash = new EntityRangeSlash(ICREntities.RANGE_SLASH.get(), this.level);
+                		slash.setOwner(this);
+                		slash.setPos(this.getX(), this.getEyeY() - 0.5, this.getZ());
+                		if(this.getHealth() <= 300)
+                		{
+                			slash.setBig(true);
+                		}
+                		double d0 = this.getTarget().getX() - this.getX();
+                		double d1 = this.getTarget().getY(0.5) - slash.getY();
+                		double d2 = this.getTarget().getZ() - this.getZ();
+                		double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+                		slash.shoot(d0 * 3, d1 + d3 * (double)0.0F, d2 * 3, 1.6F, 1);
+                		this.level.addFreshEntity(slash);
+                	}
+            	}
+            	
+            	if(this.getSkinID() == 9)
+            	{
+            		List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.5D));
+            		for(int i = 0; i < list.size(); i++)
+            		{
+            			LivingEntity living = list.get(i);
+            			if(living != this)
+            			{
+            				living.hurt(DamageSource.mobAttack(this), 46);
+            			}
+            		}
+            		
+            		if(!this.level.isClientSide)
+            		{
+                        ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
+            		}
+            	}
+            	
+            	if(this.getSkinID() == 8)
+            	{
+            		if(this.getHealth() <= 300)
+            		{
+            	    	float f14 = this.getYRot() * ((float)Math.PI / 180F);
+            	        float x = Mth.sin(f14);
+            	        float z = Mth.cos(f14);
+            	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
+            	        this.setYRot(-this.getYRot());
+            	        if(!this.level.isClientSide)
+            	        {
+            	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
+            	        }
+            			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.9D));
+            			for(int i = 0; i < list.size(); i++)
+            			{
+            				LivingEntity living = list.get(i);
+            				if(living != this)
+            				{
+            					living.hurt(DamageSource.mobAttack(this), 25);
+            				}
+            			}
+            		}
+            		else
+            		{
+            			float f14 = this.getYRot() * ((float)Math.PI / 180F);
+            	        float x = Mth.sin(f14);
+            	        float z = Mth.cos(f14);
+            	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
+            	        this.setYRot(-this.getYRot());
+            	        if(!this.level.isClientSide)
+            	        {
+            	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
+            	        }
+            			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5D));
+            			for(int i = 0; i < list.size(); i++)
+            			{
+            				LivingEntity living = list.get(i);
+            				if(living != this)
+            				{
+            					living.hurt(DamageSource.mobAttack(this), 20);
+            				}
+            			}
+            		}
+            	}
+    		}
+    		
+        	if(this.getHealth() <= 300)
+        	{
+    			for(int i = 0; i < 50; i ++)
+    			{
+    	    		double spawnRange = 30;
+    	    		double yRange = 16;
+    	            double x = (double) this.getX() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)spawnRange + 0.5D;
+    	            double y = (double) this.getY() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)yRange + 0.5D;
+    	            double z = (double) this.getZ() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)spawnRange + 0.5D;
+    	            this.level.addParticle(ICRParticles.RAGE_MODE.get(), x, y, z, 0, 0.2, 0);
+    			}
         	}
     	}
     	
@@ -275,103 +372,6 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
     		if(this.getTarget() == null)
     		{
     			this.removeAllEvents();	
-    		}
-    	}
-    	
-    	if(this.getSkinID() == 6 && this.getTarget() != null && this.isAlive())
-    	{
-        	if(this.tickCount % 5 == 0)
-        	{
-        		EntityRangeSlash slash = new EntityRangeSlash(ICREntities.RANGE_SLASH.get(), this.level);
-        		slash.setOwner(this);
-        		slash.setPos(this.getX(), this.getEyeY() - 0.5, this.getZ());
-        		if(this.getHealth() <= 300)
-        		{
-        			slash.setBig(true);
-        		}
-        		double d0 = this.getTarget().getX() - this.getX();
-        		double d1 = this.getTarget().getY(0.5) - slash.getY();
-        		double d2 = this.getTarget().getZ() - this.getZ();
-        		double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        		slash.shoot(d0 * 3, d1 + d3 * (double)0.0F, d2 * 3, 1.6F, 1);
-        		this.level.addFreshEntity(slash);
-        	}
-    	}
-    	
-    	if(this.getHealth() <= 300)
-    	{
-			for(int i = 0; i < 50; i ++)
-			{
-	    		double spawnRange = 30;
-	    		double yRange = 16;
-	            double x = (double) this.getX() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)spawnRange + 0.5D;
-	            double y = (double) this.getY() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)yRange + 0.5D;
-	            double z = (double) this.getZ() + (this.level.random.nextDouble() - this.level.random.nextDouble()) * (double)spawnRange + 0.5D;
-	            this.level.addParticle(ICRParticles.RAGE_MODE.get(), x, y, z, 0, 0.2, 0);
-			}
-    	}
-    	
-    	if(this.isAlive() && this.getSkinID() == 9)
-    	{
-    		List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.5D));
-    		for(int i = 0; i < list.size(); i++)
-    		{
-    			LivingEntity living = list.get(i);
-    			if(living != this)
-    			{
-    				living.hurt(DamageSource.mobAttack(this), 46);
-    			}
-    		}
-    		
-    		if(!this.level.isClientSide)
-    		{
-                ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
-    		}
-    	}
-    	
-    	if(this.isAlive() && this.getSkinID() == 8)
-    	{
-    		if(this.getHealth() <= 300)
-    		{
-    	    	float f14 = this.getYRot() * ((float)Math.PI / 180F);
-    	        float x = Mth.sin(f14);
-    	        float z = Mth.cos(f14);
-    	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
-    	        this.setYRot(-this.getYRot());
-    	        if(!this.level.isClientSide)
-    	        {
-    	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
-    	        }
-    			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.9D));
-    			for(int i = 0; i < list.size(); i++)
-    			{
-    				LivingEntity living = list.get(i);
-    				if(living != this)
-    				{
-    					living.hurt(DamageSource.mobAttack(this), 25);
-    				}
-    			}
-    		}
-    		else
-    		{
-    			float f14 = this.getYRot() * ((float)Math.PI / 180F);
-    	        float x = Mth.sin(f14);
-    	        float z = Mth.cos(f14);
-    	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
-    	        this.setYRot(-this.getYRot());
-    	        if(!this.level.isClientSide)
-    	        {
-    	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
-    	        }
-    			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5D));
-    			for(int i = 0; i < list.size(); i++)
-    			{
-    				LivingEntity living = list.get(i);
-    				if(living != this)
-    				{
-    					living.hurt(DamageSource.mobAttack(this), 20);
-    				}
-    			}
     		}
     	}
     }
@@ -943,7 +943,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState chargeController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 8)
+    	if(this.getSkinID() == 8 && this.isAlive())
     	{
     		event.getController().setAnimation(CHARGE);
     		return PlayState.CONTINUE;
@@ -963,7 +963,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState summonController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 5)
+    	if(this.getSkinID() == 5 && this.isAlive())
     	{
     		event.getController().setAnimation(FLEX);
     		return PlayState.CONTINUE;
@@ -973,7 +973,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState shootController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 6)
+    	if(this.getSkinID() == 6 && this.isAlive())
     	{
     		event.getController().setAnimation(SHOOT);
     		return PlayState.CONTINUE;
@@ -983,7 +983,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState stepbackController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 7)
+    	if(this.getSkinID() == 7 && this.isAlive())
     	{
     		event.getController().setAnimation(STEP_BACK);
     		return PlayState.CONTINUE;
@@ -993,7 +993,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState moveController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.isOnGround() && this.getSkinID() == 0)
+    	if(this.isOnGround() && this.getSkinID() == 0 && this.isAlive())
     	{
 			if(event.isMoving())
 			{
@@ -1027,7 +1027,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState blockController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 4)
+    	if(this.getSkinID() == 4 && this.isAlive())
     	{
     		event.getController().setAnimation(BLOCK);
     		return PlayState.CONTINUE;
@@ -1037,12 +1037,12 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState dashController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.getSkinID() == 10)
+    	if(this.getSkinID() == 10 && this.isAlive())
     	{
     		event.getController().setAnimation(PREPARE);
     		return PlayState.CONTINUE;
     	}
-    	else if(this.getSkinID() == 9)
+    	else if(this.getSkinID() == 9 && this.isAlive())
     	{
     		event.getController().setAnimation(DASH_POSE);
     		return PlayState.CONTINUE;
@@ -1052,17 +1052,17 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState attackController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.isDelayedAttacking() && this.getSkinID() == 1)
+    	if(this.isDelayedAttacking() && this.getSkinID() == 1 && this.isAlive())
     	{
     		event.getController().setAnimation(ATTACK);
     		return PlayState.CONTINUE;
 		}
-    	else if(this.isDelayedAttacking() && this.getSkinID() == 2)
+    	else if(this.isDelayedAttacking() && this.getSkinID() == 2 && this.isAlive())
     	{
     		event.getController().setAnimation(SLOW_ATTACK);
     		return PlayState.CONTINUE;
     	}
-    	else if(this.isDelayedAttacking() && this.getSkinID() == 3)
+    	else if(this.isDelayedAttacking() && this.getSkinID() == 3 && this.isAlive())
     	{
     		event.getController().setAnimation(SMASH);
     		return PlayState.CONTINUE;
