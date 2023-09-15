@@ -265,14 +265,17 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
         	}
     	}
     	
-    	if(this.getTarget() == null && !this.level.isClientSide)
+    	if(!this.isAlive())
     	{
     		this.removeAllEvents();
     	}
     	
-    	if(!this.isAlive())
+    	if(!this.level.isClientSide)
     	{
-    		this.removeAllEvents();
+    		if(this.getTarget() == null)
+    		{
+    			this.removeAllEvents();	
+    		}
     	}
     	
     	if(this.getSkinID() == 6 && this.getTarget() != null && this.isAlive())
@@ -990,23 +993,35 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	
     protected PlayState moveController(AnimationEvent<EntityGashslit> event) 
     {
-    	if(this.isOnGround() && event.isMoving())
+    	if(this.isOnGround() && this.getSkinID() == 0)
     	{
-    		if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) >= 0.98)
+			if(event.isMoving())
+			{
+        		if(this.getHealth() <= 300)
+        		{
+            		event.getController().setAnimation(RAGE_POSE);
+        		}
+        		else
+        		{
+            		if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) >= 0.98)
+            		{
+                		event.getController().setAnimation(RUN);
+            		}
+            		else if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) <= 0.2)
+            		{
+                		event.getController().setAnimation(WALK);
+            		}
+        		}
+			}
+    		else
     		{
-        		event.getController().setAnimation(RUN);
-    		}
-    		else if(this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED) <= 0.2)
-    		{
-        		event.getController().setAnimation(WALK);
+        		if(this.getHealth() <= 300)
+        		{
+            		event.getController().setAnimation(RAGE_POSE);
+        		}
     		}
     		return PlayState.CONTINUE;
     	}
-		if(this.getHealth() <= 300 && this.getSkinID() == 0)
-		{
-    		event.getController().setAnimation(RAGE_POSE);
-    		return PlayState.CONTINUE;
-		}
     	return PlayState.STOP;
     }
 	

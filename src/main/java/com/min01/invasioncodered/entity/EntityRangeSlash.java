@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -33,19 +32,19 @@ public class EntityRangeSlash extends ThrowableProjectile implements IAnimatable
 	}
 	
 	@Override
-	protected void onHitBlock(BlockHitResult p_36755_)
-	{
-		super.onHitBlock(p_36755_);
-		this.discard();
-	}
-	
-	@Override
 	public void tick()
 	{
 		super.tick();
-		if(this.tickCount >= 200)
+		if(this.tickCount >= 200 || this.getOwner() == null)
 		{
 			this.discard();
+		}
+		if(this.getOwner() != null)
+		{
+			if(this.distanceTo(this.getOwner()) >= 100)
+			{
+				this.discard();
+			}
 		}
 	}
 	
