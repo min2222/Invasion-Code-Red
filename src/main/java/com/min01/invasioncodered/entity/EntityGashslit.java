@@ -2,8 +2,8 @@ package com.min01.invasioncodered.entity;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+import com.min01.invasioncodered.misc.ICRUtil;
 import com.min01.invasioncodered.network.GashslitParticlePacket;
 import com.min01.invasioncodered.network.GashslitParticlePacket.ParticleType;
 import com.min01.invasioncodered.network.ICRNetwork;
@@ -379,47 +379,47 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     
     public void randomAttack()
     {
-    	if(this.percent(0.09))
+    	if(ICRUtil.percent(0.09))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
 			{
 	    		this.walkmode1();
 			}
     	}
-    	else if(this.percent(0.1))
+    	else if(ICRUtil.percent(0.1))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 2.5F))
 			{
 				this.walkmode2();
 			}
     	}  	
-    	else if(this.percent(0.08))
+    	else if(ICRUtil.percent(0.08))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
 			{
 				this.smash();
 			}
     	}
-    	else if(this.percent(0.2))
+    	else if(ICRUtil.percent(0.2))
     	{
 			this.dash2start();
     	}
-    	else if(this.percent(0.08))
+    	else if(ICRUtil.percent(0.08))
     	{
     		this.blockmode();
     	}
-    	else if(this.percent(0.09))
+    	else if(ICRUtil.percent(0.09))
     	{
 			this.stepback();
     	}
-    	else if(this.percent(0.12))
+    	else if(ICRUtil.percent(0.12))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
 			{
 	    		this.dash();
 			}
     	}
-    	else if(this.percent(0.08))
+    	else if(ICRUtil.percent(0.08))
     	{
     		if(this.summonCap.size() < 8)
     		{
@@ -430,51 +430,46 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     
     public void phase2RandomAttack()
     {
-    	if(this.percent(0.09))
+    	if(ICRUtil.percent(0.09))
     	{
     		if(this.isWithinMeleeAttackRange(this.getTarget(), 5.9F))
 			{
 	    		this.phase2walkmode1();
 			}
     	}
-    	else if(this.percent(0.1))
+    	else if(ICRUtil.percent(0.1))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
 			{
 				this.phase2walkmode2();
 			}
     	}
-    	else if(this.percent(0.08))
+    	else if(ICRUtil.percent(0.08))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 5.9F))
 			{
 				this.phase2smash();
 			}
     	}    	
-    	else if(this.percent(0.17))
+    	else if(ICRUtil.percent(0.17))
     	{
 			this.phase2dash2start();
     	}
-    	else if(this.percent(0.08))
+    	else if(ICRUtil.percent(0.08))
     	{
     		this.phase2blockmode();
     	}
-    	else if(this.percent(0.09))
+    	else if(ICRUtil.percent(0.09))
     	{
 			this.phase2stepback();
     	}
-    	else if(this.percent(0.12))
+    	else if(ICRUtil.percent(0.12))
     	{
 			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
 			{
 	    		this.phase2dash();
 			}
     	}
-    }
-    
-    public boolean percent(double percent) 
-    {
-        return percent > ThreadLocalRandom.current().nextDouble(0, 1);
     }
     
     public void phase2dash()
