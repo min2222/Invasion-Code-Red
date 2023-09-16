@@ -27,6 +27,7 @@ public class EventHandlerForge
 				{
 					EntityGashslit gashslit = new EntityGashslit(ICREntities.GASHSLIT.get(), event.getLevel());
 					gashslit.copyPosition(evoker);
+					gashslit.setCurrentRaid(evoker.getCurrentRaid());
 					event.getLevel().addFreshEntity(gashslit);
 					evoker.discard();
 				}
