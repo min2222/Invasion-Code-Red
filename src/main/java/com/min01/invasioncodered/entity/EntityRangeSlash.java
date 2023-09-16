@@ -36,7 +36,7 @@ public class EntityRangeSlash extends ThrowableProjectile implements IAnimatable
 	public void tick()
 	{
 		super.tick();
-		if(this.tickCount >= 200 || this.getOwner() == null)
+		if(this.tickCount >= 120 || this.getOwner() == null)
 		{
 			this.discard();
 		}

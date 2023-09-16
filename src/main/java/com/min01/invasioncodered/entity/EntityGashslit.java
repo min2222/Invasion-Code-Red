@@ -40,6 +40,7 @@ import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -52,7 +53,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
+public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
 { 
 	protected static final AnimationBuilder WALK = new AnimationBuilder().addAnimation("animation.gashslit.walk", ILoopType.EDefaultLoopTypes.LOOP);
 	protected static final AnimationBuilder RUN = new AnimationBuilder().addAnimation("animation.gashslit.run", ILoopType.EDefaultLoopTypes.LOOP);
@@ -83,7 +84,7 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 	private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.PINK, BossEvent.BossBarOverlay.PROGRESS));
 	
-	public EntityGashslit(EntityType<? extends Monster> p_33002_, Level p_33003_) 
+	public EntityGashslit(EntityType<? extends Raider> p_33002_, Level p_33003_) 
 	{
 		super(p_33002_, p_33003_);
 	}
@@ -1074,5 +1075,17 @@ public class EntityGashslit extends AbstractBedrockEntity implements IAnimatable
 	public AnimationFactory getFactory()
 	{
 		return this.factory;
+	}
+
+	@Override
+	public void applyRaidBuffs(int p_37844_, boolean p_37845_) 
+	{
+		
+	}
+
+	@Override
+	public SoundEvent getCelebrateSound()
+	{
+		return SoundEvents.VINDICATOR_CELEBRATE;
 	}
 }
