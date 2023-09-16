@@ -35,7 +35,7 @@ public class ICRConfig
     {
     	config.push("Settings");
     	ICRConfig.gashslitInRaid = config.comment("enable gashslit spawning in raid").define("gashslitInRaid", true);
-    	ICRConfig.gashslitSpawnChance = config.comment("chance for gashslit appearing in raid").define("gashslitSpawnChance", 47D);
+    	ICRConfig.gashslitSpawnChance = config.comment("chance for gashslit appearing in raid").define("gashslitSpawnChance", 25D);
         config.pop();
     }
 }
