@@ -505,9 +505,9 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	this.setSkinID(7);
         double d0 = this.getX() - this.getTarget().getX();
 		double d2 = this.getZ() - this.getTarget().getZ();
-		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
-		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
-		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
+		double xD = -d0 / (0.2f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.2f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(-xD, this.getDeltaMovement().y, -zD);
     	this.addEvent(() -> this.phase2shootmode(), 6);
     }
     
@@ -725,9 +725,9 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	this.setSkinID(7);
         double d0 = this.getX() - this.getTarget().getX();
 		double d2 = this.getZ() - this.getTarget().getZ();
-		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
-		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
-		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
+		double xD = -d0 / (0.2f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.2f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(-xD, this.getDeltaMovement().y, -zD);
     	this.addEvent(() -> this.shootmode(), 6);
     }
     
