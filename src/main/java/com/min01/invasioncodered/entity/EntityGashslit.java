@@ -308,7 +308,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
         			float f14 = this.getYRot() * ((float)Math.PI / 180F);
         	        float x = Mth.sin(f14);
         	        float z = Mth.cos(f14);
-        	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
+        	        this.setPos(this.getX() + (x * -6), this.getY() + 0.2, this.getZ() + (z * 6));
         	        this.setYRot(-this.getYRot());
         	        if(!this.level.isClientSide)
         	        {
@@ -379,7 +379,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.2))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
 			{
     			this.dash2start();
     		}
@@ -393,21 +393,21 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
 			{
 				this.stepback();
 			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
 			{
 	    		this.dash();
 			}
     	}
     	else if(ICRUtil.percent(0.08))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
 			{
 	    		if(this.summonCap.size() < 8)
 	    		{
@@ -442,7 +442,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}    	
     	else if(ICRUtil.percent(0.17))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
 			{
     			this.phase2dash2start();
     		}
@@ -456,14 +456,14 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
 			{
 				this.phase2stepback();
 			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
 			{
 	    		this.phase2dash();
 			}
@@ -538,8 +538,8 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0);
         double d0 = this.getX() - this.getTarget().getX();
 		double d2 = this.getZ() - this.getTarget().getZ();
-		double xD = -d0 / (0.2f * this.distanceTo(this.getTarget()));
-		double zD = -d2 / (0.2f * this.distanceTo(this.getTarget()));
+		double xD = -d0 / (0.07f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.07f * this.distanceTo(this.getTarget()));
 		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
 		this.addEvent(new Runnable() 
 		{
@@ -756,8 +756,8 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0);
         double d0 = this.getX() - this.getTarget().getX();
 		double d2 = this.getZ() - this.getTarget().getZ();
-		double xD = -d0 / (0.2f * this.distanceTo(this.getTarget()));
-		double zD = -d2 / (0.2f * this.distanceTo(this.getTarget()));
+		double xD = -d0 / (0.07f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.07f * this.distanceTo(this.getTarget()));
 		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
 		this.addEvent(new Runnable() 
 		{
