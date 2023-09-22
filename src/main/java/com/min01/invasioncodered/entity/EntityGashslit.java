@@ -304,48 +304,24 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
             	
             	if(this.getSkinID() == 8)
             	{
-            		if(this.getHealth() <= 300)
-            		{
-            	    	float f14 = this.getYRot() * ((float)Math.PI / 180F);
-            	        float x = Mth.sin(f14);
-            	        float z = Mth.cos(f14);
-            	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
-            	        this.setYRot(-this.getYRot());
-            	        if(!this.level.isClientSide)
-            	        {
-            	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
-            	        }
-            			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(3.9D));
-            			for(int i = 0; i < list.size(); i++)
-            			{
-            				LivingEntity living = list.get(i);
-            				if(living != this)
-            				{
-            					living.hurt(DamageSource.mobAttack(this), 25);
-            				}
-            			}
-            		}
-            		else
-            		{
-            			float f14 = this.getYRot() * ((float)Math.PI / 180F);
-            	        float x = Mth.sin(f14);
-            	        float z = Mth.cos(f14);
-            	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
-            	        this.setYRot(-this.getYRot());
-            	        if(!this.level.isClientSide)
-            	        {
-            	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
-            	        }
-            			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5D));
-            			for(int i = 0; i < list.size(); i++)
-            			{
-            				LivingEntity living = list.get(i);
-            				if(living != this)
-            				{
-            					living.hurt(DamageSource.mobAttack(this), 20);
-            				}
-            			}
-            		}
+        			float f14 = this.getYRot() * ((float)Math.PI / 180F);
+        	        float x = Mth.sin(f14);
+        	        float z = Mth.cos(f14);
+        	        this.setPos(this.getX() + (x * -2), this.getY() + 0.2, this.getZ() + (z * 2));
+        	        this.setYRot(-this.getYRot());
+        	        if(!this.level.isClientSide)
+        	        {
+        	            ICRNetwork.sendToAll(new GashslitParticlePacket(ParticleType.SLASH_HIT, this));
+        	        }
+        			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5D));
+        			for(int i = 0; i < list.size(); i++)
+        			{
+        				LivingEntity living = list.get(i);
+        				if(living != this)
+        				{
+        					living.hurt(DamageSource.mobAttack(this), this.getHealth() <= 300 ? 25 : 20);
+        				}
+        			}
             	}
     		}
     		
@@ -402,19 +378,28 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.2))
     	{
-			this.dash2start();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+    			this.dash2start();
+    		}
     	}
     	else if(ICRUtil.percent(0.08))
     	{
-    		this.blockmode();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+	    		this.blockmode();
+			}
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			this.stepback();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+				this.stepback();
+			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
 			{
 	    		this.dash();
 			}
@@ -453,19 +438,28 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}    	
     	else if(ICRUtil.percent(0.17))
     	{
-			this.phase2dash2start();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+    			this.phase2dash2start();
+    		}
     	}
     	else if(ICRUtil.percent(0.08))
     	{
-    		this.phase2blockmode();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+	    		this.phase2blockmode();
+			}
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			this.phase2stepback();
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			{
+				this.phase2stepback();
+			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F))
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F))
 			{
 	    		this.phase2dash();
 			}
@@ -505,12 +499,11 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     {
     	this.setEventFired(true);
     	this.setSkinID(7);
-		EntityDashRoar roar = new EntityDashRoar(ICREntities.DASH_ROAR.get(), this.level, this, true);
-		float f14 = this.getYRot() * ((float)Math.PI / 180F);
-        float x = Mth.sin(f14);
-        float z = Mth.cos(f14);
-		roar.setPos(this.getX() + (x * -1), this.getY(), this.getZ() + (z * 1));
-		this.level.addFreshEntity(roar);
+        double d0 = this.getX() - this.getTarget().getX();
+		double d2 = this.getZ() - this.getTarget().getZ();
+		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
     	this.addEvent(() -> this.phase2shootmode(), 6);
     }
     
@@ -539,12 +532,11 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     {
     	this.setSkinID(9);
     	this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0);
-		EntityDashRoar roar = new EntityDashRoar(ICREntities.DASH_ROAR.get(), this.level, this, false);
-        float f14 = this.getYRot() * ((float)Math.PI / 180F);
-        float x = Mth.sin(f14);
-        float z = Mth.cos(f14);
-		roar.setPos(this.getX() + (x * 1), this.getY(), this.getZ() + (z * -1));
-		this.level.addFreshEntity(roar);
+        double d0 = this.getX() - this.getTarget().getX();
+		double d2 = this.getZ() - this.getTarget().getZ();
+		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
 		this.addEvent(new Runnable() 
 		{
 			@Override
@@ -727,12 +719,11 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     {
     	this.setEventFired(true);
     	this.setSkinID(7);
-		EntityDashRoar roar = new EntityDashRoar(ICREntities.DASH_ROAR.get(), this.level, this, true);
-		float f14 = this.getYRot() * ((float)Math.PI / 180F);
-        float x = Mth.sin(f14);
-        float z = Mth.cos(f14);
-		roar.setPos(this.getX() + (x * -1), this.getY(), this.getZ() + (z * 1));
-		this.level.addFreshEntity(roar);
+        double d0 = this.getX() - this.getTarget().getX();
+		double d2 = this.getZ() - this.getTarget().getZ();
+		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
     	this.addEvent(() -> this.shootmode(), 6);
     }
     
@@ -759,12 +750,11 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     {
     	this.setSkinID(9);
     	this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0);
-		EntityDashRoar roar = new EntityDashRoar(ICREntities.DASH_ROAR.get(), this.level, this, false);
-        float f14 = this.getYRot() * ((float)Math.PI / 180F);
-        float x = Mth.sin(f14);
-        float z = Mth.cos(f14);
-		roar.setPos(this.getX() + (x * 1), this.getY(), this.getZ() + (z * -1));
-		this.level.addFreshEntity(roar);
+        double d0 = this.getX() - this.getTarget().getX();
+		double d2 = this.getZ() - this.getTarget().getZ();
+		double xD = -d0 / (0.5f * this.distanceTo(this.getTarget()));
+		double zD = -d2 / (0.5f * this.distanceTo(this.getTarget()));
+		this.setDeltaMovement(xD, this.getDeltaMovement().y, zD);
 		this.addEvent(new Runnable() 
 		{
 			@Override

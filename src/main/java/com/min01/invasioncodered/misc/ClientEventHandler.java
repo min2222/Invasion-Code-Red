@@ -1,11 +1,9 @@
 package com.min01.invasioncodered.misc;
 
 import com.min01.invasioncodered.InvasionCodeRed;
-import com.min01.invasioncodered.entity.EntityDashRoar;
 import com.min01.invasioncodered.entity.ICREntities;
 import com.min01.invasioncodered.entity.render.GashslitDragonRenderer;
 import com.min01.invasioncodered.entity.render.GashslitRenderer;
-import com.min01.invasioncodered.entity.render.NoneRenderer;
 import com.min01.invasioncodered.entity.render.RangeSlashRenderer;
 import com.min01.invasioncodered.particle.ICRParticles;
 import com.min01.invasioncodered.particle.ParticleDashSmoke;
@@ -28,7 +26,6 @@ public class ClientEventHandler
     public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
     	event.registerEntityRenderer(ICREntities.GASHSLIT.get(), GashslitRenderer::new);
-    	event.registerEntityRenderer(ICREntities.DASH_ROAR.get(), NoneRenderer<EntityDashRoar>::new);
     	event.registerEntityRenderer(ICREntities.RANGE_SLASH.get(), RangeSlashRenderer::new);
     	event.registerEntityRenderer(ICREntities.GASHSLIT_DRAGON.get(), GashslitDragonRenderer::new);
     }
