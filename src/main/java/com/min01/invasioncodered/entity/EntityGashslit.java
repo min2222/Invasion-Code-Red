@@ -184,6 +184,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     public void tick() 
     {
     	super.tick();
+    	this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 9, true, false));
     	if(this.isAlive())
     	{
     		if(this.getTarget() != null)
@@ -204,7 +205,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	    		
     	    		if(this.isDelayedAttacking())
     	    		{
-    	        		this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 9, true, false));
+    	        		//this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 9, true, false));
     	    		}
     	    		
     	    		if(this.getHealth() <= 520 && !this.entityData.get(POWER))
