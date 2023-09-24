@@ -53,24 +53,24 @@ public class GashslitParticlePacket
                 switch (message.particleType)
                 {
 				case SLASH_HIT:
-					minecraft.level.addParticle(ICRParticles.SLASH_HIT.get(), entity.getX() + (x * -2), entity.getEyeY(), entity.getZ() + (z * 2), 0, 0, 0);
+					minecraft.level.addParticle(ICRParticles.SLASH_HIT.get(), true, entity.getX() + (x * -2), entity.getEyeY(), entity.getZ() + (z * 2), 0, 0, 0);
 					break;
 				case DASH_SMOKE:
 		        	for(int i = 0; i < 25; i++)
 		        	{
-						minecraft.level.addParticle(ICRParticles.DASH_SMOKE.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.5D, entity.getY() + minecraft.level.random.nextGaussian() * 0.5D, entity.getZ() + minecraft.level.random.nextGaussian() * 0.5D, minecraft.level.random.nextGaussian() * 0.01D, 0.4, minecraft.level.random.nextGaussian() * 0.01D);
+						minecraft.level.addParticle(ICRParticles.DASH_SMOKE.get(), true, entity.getX() + minecraft.level.random.nextGaussian() * 0.5D, entity.getY() + minecraft.level.random.nextGaussian() * 0.5D, entity.getZ() + minecraft.level.random.nextGaussian() * 0.5D, minecraft.level.random.nextGaussian() * 0.01D, 0.4, minecraft.level.random.nextGaussian() * 0.01D);
 		        	}
 					break;
 				case DASH_TRAIL:
 		        	for(int i = 0; i < 140; i++)
 		        	{
-						minecraft.level.addParticle(ICRParticles.DASH_TRAIL.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.5D, entity.getY() + 0.3 + minecraft.level.random.nextGaussian() * 0.5D, entity.getZ() + minecraft.level.random.nextGaussian() * 0.5D, 0, 0.2, 0);
+						minecraft.level.addParticle(ICRParticles.DASH_TRAIL.get(), true, entity.getX() + minecraft.level.random.nextGaussian() * 0.5D, entity.getY() + 0.3 + minecraft.level.random.nextGaussian() * 0.5D, entity.getZ() + minecraft.level.random.nextGaussian() * 0.5D, 0, 0.2, 0);
 		        	}
 					break;
 				case POP_EFFECT:
 		       		for(int i = 0; i < 60; i++)
 		       		{
-		       			minecraft.level.addParticle(ICRParticles.POP_EFFECT.get(), entity.getX() + minecraft.level.random.nextGaussian() * 0.2F, entity.getY() + 0.5 + minecraft.level.random.nextGaussian() * 0.2F, entity.getZ() + minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F);
+		       			minecraft.level.addParticle(ICRParticles.POP_EFFECT.get(), true, entity.getX() + minecraft.level.random.nextGaussian() * 0.2F, entity.getY() + 0.5 + minecraft.level.random.nextGaussian() * 0.2F, entity.getZ() + minecraft.level.random.nextGaussian() * 0.2F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F, minecraft.level.random.nextGaussian() * 0.4F);
 		       		}
 					break;
 				default:
