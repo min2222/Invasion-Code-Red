@@ -379,7 +379,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.2))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 6.9F) || this.tickCount % 60 == 0)
 			{
     			this.dash2start();
     		}
@@ -393,21 +393,21 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 6.9F) || this.tickCount % 60 == 0)
 			{
 				this.stepback();
 			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 5.5F))
 			{
 	    		this.dash();
 			}
     	}
     	else if(ICRUtil.percent(0.08))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 8.5F) || this.tickCount % 60 == 0)
 			{
 	    		if(this.summonCap.size() < 8)
 	    		{
@@ -442,7 +442,7 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}    	
     	else if(ICRUtil.percent(0.17))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 6.9F) || this.tickCount % 60 == 0)
 			{
     			this.phase2dash2start();
     		}
@@ -456,14 +456,14 @@ public class EntityGashslit extends AbstractBedrockRaider implements IAnimatable
     	}
     	else if(ICRUtil.percent(0.09))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 3.9F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 6.9F) || this.tickCount % 60 == 0)
 			{
 				this.phase2stepback();
 			}
     	}
     	else if(ICRUtil.percent(0.12))
     	{
-			if(this.isWithinMeleeAttackRange(this.getTarget(), 4.5F) || this.tickCount % 120 == 0)
+			if(this.isWithinMeleeAttackRange(this.getTarget(), 5.5F))
 			{
 	    		this.phase2dash();
 			}
